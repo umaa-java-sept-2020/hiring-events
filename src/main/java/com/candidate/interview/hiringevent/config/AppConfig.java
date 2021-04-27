@@ -3,9 +3,6 @@ package com.candidate.interview.hiringevent.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -28,7 +25,7 @@ public class AppConfig {
 
     @Configuration
     @Profile("dev")
-    @PropertySource("classpath:/usr/local/content/config/hiring-event/db-dev.properties")
+    @PropertySource("file:/usr/local/content/config/hiring-event/db-dev.properties")
     static class DefaultProfile
     { }
 

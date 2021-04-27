@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 @Component
 public class FlywayDatabaseScriptInitializer {
-//
+
     @Value("${flyway.script.location}")
     private String flywayLocation;
 
