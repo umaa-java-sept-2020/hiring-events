@@ -52,10 +52,4 @@ public class AppConfig {
         ds.setDriverClassName(driverClassName);
         return ds;
     }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate()
-    {
-        return new JdbcTemplate(dataSource());
-    }
 }
