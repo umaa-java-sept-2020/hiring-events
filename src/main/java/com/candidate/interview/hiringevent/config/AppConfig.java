@@ -18,7 +18,7 @@ public class AppConfig {
     @Configuration
     @Profile("default")
     @PropertySource("file:/usr/local/content/config/hiring-event/db-local.properties")
-    static class TestProfile
+    static class DefaultProfile
     {
 
     }
@@ -26,7 +26,7 @@ public class AppConfig {
     @Configuration
     @Profile("dev")
     @PropertySource("file:/usr/local/content/config/hiring-event/db-dev.properties")
-    static class DefaultProfile
+    static class DevProfile
     { }
 
 
