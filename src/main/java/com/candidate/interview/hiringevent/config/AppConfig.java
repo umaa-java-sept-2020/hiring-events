@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 import org.springframework.context.annotation.*;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
@@ -17,7 +16,7 @@ public class AppConfig {
 
     @Configuration
     @Profile("default")
-    @PropertySource("file:/usr/local/content/config/hiring-event/db-local.properties")
+    @PropertySource("db-local.properties")
     static class DefaultProfile
     {
 
