@@ -2,6 +2,7 @@ package com.candidate.interview.hiringevent.runtime.model;
 
 public class SkillSet extends ModelEntity {
 
+    // skillset-UUID
     private Integer id;
     private String skillName;
     private String description;

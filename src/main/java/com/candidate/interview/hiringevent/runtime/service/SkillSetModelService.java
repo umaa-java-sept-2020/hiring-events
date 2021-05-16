@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SkillSetModelService {
@@ -20,6 +21,7 @@ public class SkillSetModelService {
     public SkillSet save(SkillSet skillSet)
     {
         skillSet.setCreatedBy(userInfoService.getCurrentLoggedInUserInfo().getUserId());
+        skillSet.setResourceId("skill-"+ UUID.randomUUID().toString());
         return skillSetDao.insert(skillSet);
     }
 

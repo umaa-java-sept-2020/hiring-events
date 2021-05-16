@@ -16,7 +16,7 @@ public class TestRun {
         skillSet.setDescription("dummy desc");
         skillSet.setSkillName("JAVA");
 
-      //  skillSetModelService.save(skillSet);
+        skillSetModelService.save(skillSet);
 
         Object result = skillSetModelService.findAll();
         System.out.println(result);
