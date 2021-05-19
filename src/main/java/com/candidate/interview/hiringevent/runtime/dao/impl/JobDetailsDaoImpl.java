@@ -13,7 +13,7 @@ public class JobDetailsDaoImpl extends AbstractDaoImpl<JobDetails, Integer> {
 
     private final String INSERT = "INSERT INTO TBL_JOB_DETAILS(TITLE, DESCRIPTION,TEAM,MANAGER_EMAIL," +
             "NUM_OF_POSITIONS, RESOURCE_ID, CREATED_BY,MODIFIED_BY) " +
-            "VALUES(?,?,?)";
+            "VALUES(?,?,?,?,?,?,?,?)";
     private final String DELETE = "DELETE FROM TBL_JOB_DETAILS WHERE ID=?";
     private final String SELECT_ONE = "SELECT * FROM TBL_JOB_DETAILS WHERE ID=?";
     private final String SELECT_ALL = "SELECT * FROM TBL_JOB_DETAILS";
