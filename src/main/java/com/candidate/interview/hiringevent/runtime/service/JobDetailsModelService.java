@@ -39,4 +39,9 @@ public class JobDetailsModelService {
     {
         return jobDetailsDao.selectAll();
     }
+
+    public JobDetails updateById(Integer id, JobDetails jobDetails)
+    {
+        return jobDetailsDao.update(id,jobDetails);
+    }
 }

@@ -4,9 +4,7 @@ import com.candidate.interview.hiringevent.runtime.model.SkillSet;
 import com.candidate.interview.hiringevent.runtime.service.SkillSetModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -25,23 +23,33 @@ public class SkillsRestController extends AbstractRestController<SkillSet, Integ
         return ResponseEntity.ok(body);
     }
 
+    @PutMapping("/{id}")
     @Override
-    public ResponseEntity<SkillSet> updateResource(SkillSet body, Integer id, HttpServletRequest request) {
-        return null;
+    public ResponseEntity<SkillSet> updateResource(@RequestBody SkillSet body, @PathVariable("id") Integer id,
+                                                   HttpServletRequest request) {
+        body.setId(id);
+        SkillSet skillSet = skillSetModelService.updateById(id,body);
+        return ResponseEntity.ok(skillSet);
     }
 
+    @GetMapping("/{id}")
     @Override
-    public ResponseEntity<List<SkillSet>> getResource(Integer id, HttpServletRequest request) {
-        return null;
+    public ResponseEntity<SkillSet> getResource(@PathVariable("id") Integer id, HttpServletRequest request) {
+        SkillSet skillSet = skillSetModelService.findById(id);
+
+        return ResponseEntity.ok(skillSet);
     }
 
+    @GetMapping("/")
     @Override
     public ResponseEntity<List<SkillSet>> getResources(HttpServletRequest request) {
-        return null;
+        List<SkillSet> skillSetList = skillSetModelService.findAll();
+        return ResponseEntity.ok(skillSetList);
     }
 
+    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Integer> deleteResource(Integer id, HttpServletRequest request) {
+    public ResponseEntity<Integer> deleteResource(@PathVariable("id") Integer id, HttpServletRequest request) {
         Boolean result = skillSetModelService.delete(id);
         return ResponseEntity.ok(1);
     }
