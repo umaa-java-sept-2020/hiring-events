@@ -11,7 +11,7 @@ public abstract class AbstractRestController<T,I> {
 
     public abstract ResponseEntity<T> createResource(@RequestBody T body, HttpServletRequest request);
     public abstract ResponseEntity<T> updateResource(@RequestBody T body, @PathVariable I id, HttpServletRequest request);
-    public abstract ResponseEntity<List<T>> getResource(@PathVariable I id, HttpServletRequest request);
+    public abstract ResponseEntity<T> getResource(@PathVariable I id, HttpServletRequest request);
     public abstract ResponseEntity<List<T>> getResources(HttpServletRequest request);
     public abstract ResponseEntity<I> deleteResource(@PathVariable I id, HttpServletRequest request);
 

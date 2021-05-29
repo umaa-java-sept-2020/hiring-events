@@ -2,34 +2,82 @@ package com.candidate.interview.hiringevent.runtime.dao.impl;
 
 import com.candidate.interview.hiringevent.runtime.dao.AbstractDaoImpl;
 import com.candidate.interview.hiringevent.runtime.model.JobDetails;
+import com.candidate.interview.hiringevent.runtime.model.SkillSet;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class JobDetailsDaoImpl extends AbstractDaoImpl<JobDetails, Integer> {
+
+    private final String INSERT = "INSERT INTO TBL_JOB_DETAILS(ID,TITLE, DESCRIPTION,TEAM,MANAGER_EMAIL," +
+            "NUM_OF_POSITIONS,EXP_DT,MIN_EXP_DT,MAX_EXP_DT,RESOURCE_ID, CREATED_BY,MODIFIED_BY) " +
+            "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String DELETE = "DELETE FROM TBL_JOB_DETAILS WHERE ID=?";
+    private final String SELECT_ONE = "SELECT * FROM TBL_JOB_DETAILS WHERE ID=?";
+    private final String SELECT_ALL = "SELECT * FROM TBL_JOB_DETAILS";
+    private final String UPDATE_SKILL_SET = "UPDATE TBL_JOB_DETAILS SET TITLE=? WHERE ID=?";
+
+
     @Override
     public JobDetails insert(JobDetails jobDetails) {
-        return null;
+        int rows = getJdbcTemplate().update(INSERT,
+                new Object[]{jobDetails.getId(),
+                        jobDetails.getTitle(),
+                jobDetails.getDescription(),
+                jobDetails.getTeam(),jobDetails.getHiringManagerEmail(),
+                jobDetails.getNumOfPositions(),
+                        jobDetails.getJobExpiryDate(),
+                jobDetails.getMinExp(),jobDetails.getMaxExp(),
+                jobDetails.getResourceId(),jobDetails.getCreatedBy(),
+                jobDetails.getModifiedBy()});
+        if (rows == 0)
+            throw new RuntimeException("error while saving entity skillSet");
+        return jobDetails;
     }
 
     @Override
     public JobDetails update(Integer id, JobDetails jobDetails) {
-        return null;
+        int row = getJdbcTemplate().update(UPDATE_SKILL_SET,new Object[]{jobDetails.getTitle(),jobDetails.getId()});
+        if (row == 0)
+            throw new RuntimeException("error while saving entry to job details");
+        else
+            System.out.println(row);
+        return jobDetails;
+
     }
 
     @Override
     public Integer delete(Integer id) {
-        return null;
+        return getJdbcTemplate().update(DELETE, new Object[]{id});
     }
 
     @Override
     public JobDetails select(Integer id) {
-        return null;
+        return getJdbcTemplate().queryForObject(SELECT_ONE,jobDetailsRow, new Object[]{id});
     }
 
     @Override
     public List<JobDetails> selectAll() {
-        return null;
+        return getJdbcTemplate().query(SELECT_ALL,jobDetailsRow);
     }
+
+    private static final RowMapper<JobDetails> jobDetailsRow = (resultSet, i) -> {
+
+        JobDetails jobDetails  = new JobDetails();
+        jobDetails.setId(resultSet.getInt("ID"));
+        jobDetails.setTitle(resultSet.getString("TITLE"));
+        jobDetails.setDescription(resultSet.getString("DESCRIPTION"));
+        jobDetails.setTeam(resultSet.getString("TEAM"));
+        jobDetails.setHiringManagerEmail(resultSet.getString("MANAGER_EMAIL"));
+        jobDetails.setNumOfPositions(resultSet.getInt("NUM_OF_POSITIONS"));
+        jobDetails.setJobExpiryDate(resultSet.getDate("EXP_DT"));
+        jobDetails.setMinExp(resultSet.getInt("MIN_EXP_DT"));
+        jobDetails.setMaxExp(resultSet.getInt("MAX_EXP_DT"));
+        jobDetails.setResourceId(resultSet.getString("RESOURCE_ID"));
+        jobDetails.setCreatedBy(resultSet.getString("CREATED_BY"));
+        jobDetails.setModifiedBy(resultSet.getLong("MODIFIED_BY"));
+        return jobDetails;
+    };
 }

@@ -39,4 +39,8 @@ public class SkillSetModelService {
     {
         return skillSetDao.selectAll();
     }
+
+    public SkillSet updateById(Integer id, SkillSet skillSet){
+        return skillSetDao.update(id,skillSet);
+    }
 }

@@ -6,13 +6,30 @@ import java.util.Date;
 public class JobDetails extends ModelEntity {
 
     private Integer id;
-    private String title; // input
-    private String description; // input
-    private String team; // POOL, DMP, FAWB
+    private Integer minExp;
+    private Integer maxExp;
     private String hiringManagerEmail; // input
     private Date jobExpiryDate; // input
     private Integer numOfPositions;
+    private String title; // input
+    private String description; // input
+    private String team; // POOL, DMP, FAWB
 
+    public Integer getMinExp() {
+        return minExp;
+    }
+
+    public void setMinExp(Integer minExp) {
+        this.minExp = minExp;
+    }
+
+    public Integer getMaxExp() {
+        return maxExp;
+    }
+
+    public void setMaxExp(Integer maxExp) {
+        this.maxExp = maxExp;
+    }
     public Integer getId() {
         return id;
     }
