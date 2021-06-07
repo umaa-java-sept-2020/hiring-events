@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/job-details")
 public class JobDetailsController extends AbstractRestController<JobDetails, Integer>{
@@ -19,15 +20,15 @@ public class JobDetailsController extends AbstractRestController<JobDetails, Int
 
     @PostMapping("/")
     @Override
-    public ResponseEntity<JobDetails> createResource(JobDetails body, HttpServletRequest request) {
-        JobDetails jobDetails = jobDetailsModelService.save(body);
+    public ResponseEntity<JobDetails> createResource(@RequestBody JobDetails body, HttpServletRequest request) {
+        JobDetails jobdetails = jobDetailsModelService.save(body);
         return ResponseEntity.ok(body);
     }
 
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<JobDetails> updateResource(JobDetails body, @PathVariable("id") Integer id,
+    public ResponseEntity<JobDetails> updateResource(@RequestBody JobDetails body, @PathVariable("id") Integer id,
             HttpServletRequest request) {
         body.setId(id);
         JobDetails jobDetails = jobDetailsModelService.updateById(id,body);
@@ -36,9 +37,9 @@ public class JobDetailsController extends AbstractRestController<JobDetails, Int
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<JobDetails> getResource(@PathVariable("id") Integer id, HttpServletRequest request) {
-        JobDetails jobDetails = jobDetailsModelService.findById(id);
+        JobDetails skillSet = jobDetailsModelService.findById(id);
 
-        return ResponseEntity.ok(jobDetails);
+        return ResponseEntity.ok(skillSet);
     }
     @GetMapping("/")
     @Override

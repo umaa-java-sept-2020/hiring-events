@@ -23,6 +23,7 @@ public class JobDetailsModelService {
     {
         jobDetails.setCreatedBy(userInfoService.getCurrentLoggedInUserInfo().getUserId());
         jobDetails.setResourceId("skill-"+ UUID.randomUUID().toString());
+        jobDetails.setModifiedBy("skill-"+ UUID.randomUUID().toString());
         return jobDetailsDao.insert(jobDetails);
     }
     public boolean delete(Integer id)

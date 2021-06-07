@@ -58,7 +58,7 @@ public class SkillSetDaoImpl extends AbstractDaoImpl<SkillSet, Integer> {
         skillSet.setSkillName(resultSet.getString("SKILL_SET"));
         skillSet.setDescription(resultSet.getString("DESCRIPTION"));
         skillSet.setId(resultSet.getInt("ID"));
-        skillSet.setModifiedBy(resultSet.getLong("MODIFIED_BY"));
+        skillSet.setModifiedBy(resultSet.getString("MODIFIED_BY"));
         skillSet.setResourceId(resultSet.getString("RESOURCE_ID"));
         return skillSet;
     };

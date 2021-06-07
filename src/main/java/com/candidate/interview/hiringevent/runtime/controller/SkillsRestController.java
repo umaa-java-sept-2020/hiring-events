@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/skills")
 public class SkillsRestController extends AbstractRestController<SkillSet, Integer> {
@@ -18,7 +18,7 @@ public class SkillsRestController extends AbstractRestController<SkillSet, Integ
 
     @PostMapping("/")
     @Override
-    public ResponseEntity<SkillSet> createResource(SkillSet body, HttpServletRequest request) {
+    public ResponseEntity<SkillSet> createResource(@RequestBody SkillSet body, HttpServletRequest request) {
         SkillSet skillSet = skillSetModelService.save(body);
         return ResponseEntity.ok(body);
     }
