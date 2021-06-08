@@ -5,7 +5,7 @@ public class ModelEntity {
     private String createdBy;
     private Long createdAt;
     private Long modifiedAt;
-    private Long modifiedBy;
+    private String modifiedBy;
     private String resourceId;
 
     public String getCreatedBy() {
@@ -32,11 +32,11 @@ public class ModelEntity {
         this.modifiedAt = modifiedAt;
     }
 
-    public Long getModifiedBy() {
+    public String getModifiedBy() {
         return modifiedBy;
     }
 
-    public void setModifiedBy(Long modifiedBy) {
+    public void setModifiedBy(String modifiedBy) {
         this.modifiedBy = modifiedBy;
     }
 

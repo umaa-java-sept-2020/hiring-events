@@ -12,7 +12,7 @@ import java.util.List;
 public class JobDetailsDaoImpl extends AbstractDaoImpl<JobDetails, Integer> {
 
     private final String INSERT = "INSERT INTO TBL_JOB_DETAILS(ID,TITLE, DESCRIPTION,TEAM,MANAGER_EMAIL," +
-            "NUM_OF_POSITIONS,EXP_DT,MIN_EXP_DT,MAX_EXP_DT,RESOURCE_ID, CREATED_BY,MODIFIED_BY) " +
+            "NUM_OF_POSITIONS,EXP_DT,MIN_EXP,MAX_EXP,RESOURCE_ID, CREATED_BY,MODIFIED_BY) " +
             "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String DELETE = "DELETE FROM TBL_JOB_DETAILS WHERE ID=?";
     private final String SELECT_ONE = "SELECT * FROM TBL_JOB_DETAILS WHERE ID=?";
@@ -73,11 +73,11 @@ public class JobDetailsDaoImpl extends AbstractDaoImpl<JobDetails, Integer> {
         jobDetails.setHiringManagerEmail(resultSet.getString("MANAGER_EMAIL"));
         jobDetails.setNumOfPositions(resultSet.getInt("NUM_OF_POSITIONS"));
         jobDetails.setJobExpiryDate(resultSet.getDate("EXP_DT"));
-        jobDetails.setMinExp(resultSet.getInt("MIN_EXP_DT"));
-        jobDetails.setMaxExp(resultSet.getInt("MAX_EXP_DT"));
+        jobDetails.setMinExp(resultSet.getInt("MIN_EXP"));
+        jobDetails.setMaxExp(resultSet.getInt("MAX_EXP"));
         jobDetails.setResourceId(resultSet.getString("RESOURCE_ID"));
         jobDetails.setCreatedBy(resultSet.getString("CREATED_BY"));
-        jobDetails.setModifiedBy(resultSet.getLong("MODIFIED_BY"));
+        jobDetails.setModifiedBy(resultSet.getString("MODIFIED_BY"));
         return jobDetails;
     };
 }

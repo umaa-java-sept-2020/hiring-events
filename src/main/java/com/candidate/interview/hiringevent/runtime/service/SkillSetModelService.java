@@ -22,6 +22,7 @@ public class SkillSetModelService {
     {
         skillSet.setCreatedBy(userInfoService.getCurrentLoggedInUserInfo().getUserId());
         skillSet.setResourceId("skill-"+ UUID.randomUUID().toString());
+        skillSet.setModifiedBy(skillSet.getCreatedBy());
         return skillSetDao.insert(skillSet);
     }
 
@@ -41,6 +42,7 @@ public class SkillSetModelService {
     }
 
     public SkillSet updateById(Integer id, SkillSet skillSet){
+        skillSet.setModifiedBy(userInfoService.getCurrentLoggedInUserInfo().getUserId());
         return skillSetDao.update(id,skillSet);
     }
 }
