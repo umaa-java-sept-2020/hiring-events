@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/job-details")
-public class JobDetailsController extends AbstractRestController<JobDetails, Integer>{
+public class JobDetailsController extends AbstractRestController<JobDetails, Integer> {
 
     @Autowired
     private JobDetailsModelService jobDetailsModelService;
@@ -22,31 +22,36 @@ public class JobDetailsController extends AbstractRestController<JobDetails, Int
     @Override
     public ResponseEntity<JobDetails> createResource(@RequestBody JobDetails body, HttpServletRequest request) {
         JobDetails jobdetails = jobDetailsModelService.save(body);
-        return ResponseEntity.ok(body);
+        return ResponseEntity.ok(jobdetails);
     }
 
 
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<JobDetails> updateResource(@RequestBody JobDetails body, @PathVariable("id") Integer id,
-            HttpServletRequest request) {
-        body.setId(id);
-        JobDetails jobDetails = jobDetailsModelService.updateById(id,body);
-        return ResponseEntity.ok(jobDetails);
+                                                     HttpServletRequest request) {
+        JobDetails jobdetails = jobDetailsModelService.updateById(id, body);
+        return ResponseEntity.ok(jobdetails);
+
     }
+
+
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<JobDetails> getResource(@PathVariable("id") Integer id, HttpServletRequest request) {
-        JobDetails skillSet = jobDetailsModelService.findById(id);
 
-        return ResponseEntity.ok(skillSet);
+        JobDetails jobDetails = jobDetailsModelService.findById(id);
+
+        return ResponseEntity.ok(jobDetails);
     }
+
     @GetMapping("/")
     @Override
     public ResponseEntity<List<JobDetails>> getResources(HttpServletRequest request) {
         List<JobDetails> jobDetailsList = jobDetailsModelService.findAll();
         return ResponseEntity.ok(jobDetailsList);
     }
+
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<Integer> deleteResource(@PathVariable("id") Integer id, HttpServletRequest request) {
