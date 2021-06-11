@@ -30,9 +30,9 @@ public class JobDetailsController extends AbstractRestController<JobDetails, Int
     @Override
     public ResponseEntity<JobDetails> updateResource(@RequestBody JobDetails body, @PathVariable("id") Integer id,
                                                      HttpServletRequest request) {
+        body.setId(id);
         JobDetails jobdetails = jobDetailsModelService.updateById(id, body);
         return ResponseEntity.ok(jobdetails);
-
     }
 
 
