@@ -20,7 +20,7 @@ public class SkillsRestController extends AbstractRestController<SkillSet, Integ
     @Override
     public ResponseEntity<SkillSet> createResource(@RequestBody SkillSet body, HttpServletRequest request) {
         SkillSet skillSet = skillSetModelService.save(body);
-        return ResponseEntity.ok(body);
+        return ResponseEntity.ok(skillSet);
     }
 
     @PutMapping("/{id}")
