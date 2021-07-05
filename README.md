@@ -5,4 +5,4 @@
 * Now to add the content into above db-local.properties file get it from this link: https://github.com/umaa-java-sept-2020/hiring-events/blob/master/src/main/resources/db-local.properties
 * start your application as mvn spring-boot:run
 * Swagger UI
-![image](https://user-images.githubusercontent.com/71244681/119388062-6f8e5c00-bce7-11eb-8b88-44e702be2b9b.png)
+![image](https://user-images.githubusercontent.com/71244681/124430423-c9754d80-dd8c-11eb-9c71-949d17110b24.png)
