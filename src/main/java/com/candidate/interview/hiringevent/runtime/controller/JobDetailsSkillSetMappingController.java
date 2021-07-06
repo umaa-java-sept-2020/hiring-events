@@ -33,15 +33,19 @@ public class JobDetailsSkillSetMappingController extends AbstractRestController<
     public ResponseEntity<JobDetailsSkillSetMapping> updateResource(JobDetailsSkillSetMapping body, Integer id, HttpServletRequest request) {
         return null;
     }
-
+    @GetMapping("/{id}")
     @Override
-    public ResponseEntity<JobDetailsSkillSetMapping> getResource(Integer id, HttpServletRequest request) {
-        return null;
-    }
+    public ResponseEntity<JobDetailsSkillSetMapping> getResource(@PathVariable("id") Integer id,
+                                                                 HttpServletRequest request) {
+        JobDetailsSkillSetMapping jobDetailsSkillSetMapping = jobDetailsSkillSetMappingModelService.findById(id);
 
+        return ResponseEntity.ok(jobDetailsSkillSetMapping);
+    }
+    @GetMapping("/")
     @Override
     public ResponseEntity<List<JobDetailsSkillSetMapping>> getResources(HttpServletRequest request) {
-        return null;
+        List<JobDetailsSkillSetMapping> jobDetailsSkillSetMappings = jobDetailsSkillSetMappingModelService.findAll();
+        return ResponseEntity.ok(jobDetailsSkillSetMappings);
     }
     @DeleteMapping("/{id}")
     @Override

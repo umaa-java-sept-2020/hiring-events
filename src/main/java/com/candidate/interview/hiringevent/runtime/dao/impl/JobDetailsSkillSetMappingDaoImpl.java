@@ -1,23 +1,28 @@
 package com.candidate.interview.hiringevent.runtime.dao.impl;
 
 import com.candidate.interview.hiringevent.runtime.dao.AbstractDaoImpl;
+import com.candidate.interview.hiringevent.runtime.model.JobDetails;
 import com.candidate.interview.hiringevent.runtime.model.JobDetailsSkillSetMapping;
 import com.candidate.interview.hiringevent.runtime.model.SkillSet;
+import com.candidate.interview.hiringevent.runtime.service.JobDetailsSkillSetMappingModelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class JobDetailsSkillSetMappingDaoImpl
         extends AbstractDaoImpl<JobDetailsSkillSetMapping,Integer> {
-
     private final String DELETE = "DELETE FROM TBL_JOB_DETAILS_SKILL_SET_MAPPING WHERE JOB_ID=?";
     private final String INSERT = "INSERT INTO " +
             "TBL_JOB_DETAILS_SKILL_SET_MAPPING(JOB_ID,SKILL_SET_ID) VALUES (?,?)";
+    private final String SELECT_ONE= "SELECT * FROM TBL_JOB_DETAILS_SKILL_SET_MAPPING WHERE JOB_ID=?";
+    private final String SELECT_ALL= "SELECT * FROM TBL_JOB_DETAILS_SKILL_SET_MAPPING";
 
     @Override
     public JobDetailsSkillSetMapping insert(JobDetailsSkillSetMapping jobDetailsSkillSetMapping) {
@@ -55,13 +60,24 @@ public class JobDetailsSkillSetMappingDaoImpl
 
     @Override
     public JobDetailsSkillSetMapping select(Integer id) {
-        return null;
+            return getJdbcTemplate().queryForObject(SELECT_ONE,jobDetailsSkillSetMappingMapper, new Object[]{id});
     }
 
     @Override
     public List<JobDetailsSkillSetMapping> selectAll() {
-        return null;
+        return getJdbcTemplate().query(SELECT_ALL, jobDetailsSkillSetMappingMapper);
     }
 
+    private static final RowMapper<JobDetailsSkillSetMapping> jobDetailsSkillSetMappingMapper = (resultSet, i) -> {
+        JobDetailsSkillSetMapping jobDetailsSkillSetMapping = new JobDetailsSkillSetMapping();
+        jobDetailsSkillSetMapping.setJobId(resultSet.getInt("JOB_ID"));
 
+        ArrayList<SkillSet> skills = new ArrayList<>();
+        skills.add(new SkillSet());
+        while (resultSet.next()){
+            System.out.println(resultSet.getInt("SKILL_SET_ID"));
+        }
+
+        return jobDetailsSkillSetMapping;
+    };
 }
