@@ -22,7 +22,7 @@ public class JobDetailsSkillSetMappingDaoImpl
     private final String INSERT = "INSERT INTO " +
             "TBL_JOB_DETAILS_SKILL_SET_MAPPING(JOB_ID,SKILL_SET_ID) VALUES (?,?)";
     private final String SELECT_ONE= "SELECT * FROM TBL_JOB_DETAILS_SKILL_SET_MAPPING WHERE JOB_ID=?";
-    private final String SELECT_ALL= "SELECT * FROM TBL_JOB_DETAILS_SKILL_SET_MAPPING";
+    private final String SELECT_ALL= "SELECT JOB_ID,SKILL_SET_ID FROM TBL_JOB_DETAILS_SKILL_SET_MAPPING";
 
     @Override
     public JobDetailsSkillSetMapping insert(JobDetailsSkillSetMapping jobDetailsSkillSetMapping) {
@@ -72,12 +72,17 @@ public class JobDetailsSkillSetMappingDaoImpl
         JobDetailsSkillSetMapping jobDetailsSkillSetMapping = new JobDetailsSkillSetMapping();
         jobDetailsSkillSetMapping.setJobId(resultSet.getInt("JOB_ID"));
 
-        ArrayList<SkillSet> skills = new ArrayList<>();
-        skills.add(new SkillSet());
-        while (resultSet.next()){
-            System.out.println(resultSet.getInt("SKILL_SET_ID"));
-        }
 
+        jobDetailsSkillSetMapping.setSkills(new ArrayList<>());
+        SkillSet skillSet = new SkillSet();
+        skillSet.setId(resultSet.getInt("SKILL_SET_ID"));
+        jobDetailsSkillSetMapping.getSkills().add(skillSet);
+
+        while(resultSet.next()){
+            skillSet = new SkillSet();
+            skillSet.setId(resultSet.getInt("SKILL_SET_ID"));
+            jobDetailsSkillSetMapping.getSkills().add(skillSet);
+        }
         return jobDetailsSkillSetMapping;
     };
 }
