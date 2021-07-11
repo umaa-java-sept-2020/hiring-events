@@ -2,11 +2,16 @@ package com.candidate.interview.hiringevent.runtime.model;
 
 public class UserInfo extends ModelEntity{
 
+    /**
+     * Write controller for Store & List UserInfo fields like email, userType, mockUser in database,
+     */
     private Integer id;
     private String userId; // cant be changed.
-    private String email;
+    private String email; // cant be changed
     private String password;
+    private UserType userType;
     private boolean mockUser;
+
     private LoginProvider loginProvider;
 
     public Integer getId() {
