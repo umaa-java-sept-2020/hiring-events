@@ -10,7 +10,7 @@ public class UserInfo extends ModelEntity{
     private String email; // cant be changed
     private String password;
     private UserType userType;
-    private boolean mockUser;
+    private Boolean mockUser;
 
     private LoginProvider loginProvider;
 
@@ -54,11 +54,19 @@ public class UserInfo extends ModelEntity{
         this.email = email;
     }
 
-    public LoginProvider getLoginType() {
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public LoginProvider getLoginProvider() {
         return loginProvider;
     }
 
-    public void setLoginType(LoginProvider loginProvider) {
+    public void setLoginProvider(LoginProvider loginProvider) {
         this.loginProvider = loginProvider;
     }
 }
