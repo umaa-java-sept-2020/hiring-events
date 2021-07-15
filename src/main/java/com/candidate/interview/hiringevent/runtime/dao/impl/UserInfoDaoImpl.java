@@ -9,10 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-// EMAIL_ID VARCHAR(256) PRIMARY KEY,
-//         USER_TYPE ENUM ('CANDIDATE', 'INTERVIEWER'),
-//         MOCK_USER TINYINT,
-//         LOGIN_PROVIDER ENUM ('DATABASE','GITHUB','MOCK')
 public class UserInfoDaoImpl extends AbstractDaoImpl<UserInfo, Integer> {
 
     private final String INSERT = "INSERT INTO TBL_USER_INFO(EMAIL_ID, USER_TYPE, MOCK_USER,LOGIN_PROVIDER) VALUES " +
@@ -20,8 +16,9 @@ public class UserInfoDaoImpl extends AbstractDaoImpl<UserInfo, Integer> {
     private final String SELECT_ALL = "SELECT * FROM TBL_USER_INFO";
     @Override
     public UserInfo insert(UserInfo userInfo) {
-        int rows = getJdbcTemplate().update(INSERT, new Object[]{userInfo.getEmail(),userInfo.getUserType(),
-        userInfo.isMockUser(),userInfo.getLoginProvider()});
+        int rows = getJdbcTemplate().update(INSERT, new Object[]{userInfo.getEmail(),userInfo.getUserType().name(),
+        userInfo.isMockUser(),userInfo.getLoginProvider().name()});
+
         if (rows == 0)
             throw new RuntimeException("error while saving entity skillSet");
         return userInfo;

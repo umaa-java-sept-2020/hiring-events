@@ -1,5 +1,7 @@
 package com.candidate.interview.hiringevent.runtime.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserInfo extends ModelEntity{
 
     /**
@@ -10,7 +12,9 @@ public class UserInfo extends ModelEntity{
     private String email; // cant be changed
     private String password;
     private UserType userType;
-    private Boolean mockUser;
+
+    @JsonProperty
+    private boolean mockUser;
 
     private LoginProvider loginProvider;
 

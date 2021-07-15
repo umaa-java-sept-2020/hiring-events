@@ -22,6 +22,7 @@ public class UserInfoRestController extends AbstractRestController<UserInfo, Int
     @PostMapping("/")
     @Override
     public ResponseEntity<UserInfo> createResource(@RequestBody  UserInfo body, HttpServletRequest request) {
+        System.out.println(body.isMockUser());
         UserInfo userInfo = userInfoModelService.save(body);
         return ResponseEntity.ok(userInfo);
     }
