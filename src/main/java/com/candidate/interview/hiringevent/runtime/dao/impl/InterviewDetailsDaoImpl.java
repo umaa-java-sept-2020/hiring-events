@@ -3,6 +3,7 @@ package com.candidate.interview.hiringevent.runtime.dao.impl;
 import com.candidate.interview.hiringevent.runtime.dao.AbstractDaoImpl;
 import com.candidate.interview.hiringevent.runtime.model.Interview;
 import com.candidate.interview.hiringevent.runtime.model.InterviewStatus;
+import com.candidate.interview.hiringevent.runtime.model.UserInfo;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,8 @@ public class InterviewDetailsDaoImpl extends AbstractDaoImpl<Interview, Integer>
             "INTERVIEW_STATUS) VALUES (?,?,?,?,?)";
     private final String SELECT_ONE= "SELECT * FROM TBL_INTERVIEW_DETAILS WHERE ID=?";
     private final String SELECT_ALL= "SELECT * FROM TBL_INTERVIEW_DETAILS";
+    private final String DELETE = "DELETE FROM TBL_INTERVIEW_DETAILS WHERE ID=?";
+    private final String UPDATE_SKILL_SET = "UPDATE TBL_INTERVIEW_DETAILS SET TITLE=? WHERE ID=?";
 
     @Override
     public Interview insert(Interview interview) {
@@ -26,13 +29,19 @@ public class InterviewDetailsDaoImpl extends AbstractDaoImpl<Interview, Integer>
 
     @Override
     public Interview update(Integer id, Interview interview) {
-        return null;
+        int rows = getJdbcTemplate().update(UPDATE_SKILL_SET,new Object[]{interview.getTitle(),interview.getId()} );
+        if (rows == 0)
+            throw new RuntimeException("error while updating");
+        else
+            System.out.println(rows);
+        return interview;
     }
 
     @Override
     public Integer delete(Integer id) {
-        return null;
+        return getJdbcTemplate().update(DELETE, new Object[]{id});
     }
+
 
     @Override
     public Interview select(Integer id) {

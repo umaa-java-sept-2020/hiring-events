@@ -1,5 +1,6 @@
 package com.candidate.interview.hiringevent.runtime.controller;
 
+import com.candidate.interview.hiringevent.runtime.model.Interview;
 import com.candidate.interview.hiringevent.runtime.model.InterviewRound;
 import com.candidate.interview.hiringevent.runtime.model.SkillSet;
 import com.candidate.interview.hiringevent.runtime.service.InterviewRoundModelService;
@@ -25,14 +26,7 @@ public class InterviewRoundController extends AbstractRestController<InterviewRo
         return ResponseEntity.ok(interviewRound);
     }
 
-    @PutMapping("/{id}")
-    @Override
-    public ResponseEntity<InterviewRound> updateResource(@RequestBody InterviewRound body, @PathVariable("id") Integer id,
-                                                   HttpServletRequest request) {
-        body.setId(id);
-        InterviewRound interviewRound = interviewRoundModelService.updateById(id,body);
-        return ResponseEntity.ok(interviewRound);
-    }
+
 
     @GetMapping("/{id}")
     @Override
@@ -48,6 +42,17 @@ public class InterviewRoundController extends AbstractRestController<InterviewRo
         List<InterviewRound> interviewRoundList = interviewRoundModelService.findAll();
         return ResponseEntity.ok(interviewRoundList);
     }
+
+
+    @PutMapping("/{id}")
+    @Override
+    public ResponseEntity<InterviewRound> updateResource(@RequestBody InterviewRound body, @PathVariable("id") Integer id,
+                                                    HttpServletRequest request) {
+        body.setId(id);
+        InterviewRound interviewRound = interviewRoundModelService.updateById(id,body);
+        return ResponseEntity.ok(interviewRound);
+    }
+
 
     @DeleteMapping("/{id}")
     @Override

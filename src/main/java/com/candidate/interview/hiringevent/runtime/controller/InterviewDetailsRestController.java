@@ -2,6 +2,7 @@ package com.candidate.interview.hiringevent.runtime.controller;
 
 import com.candidate.interview.hiringevent.runtime.model.Interview;
 import com.candidate.interview.hiringevent.runtime.model.JobDetails;
+import com.candidate.interview.hiringevent.runtime.model.UserInfo;
 import com.candidate.interview.hiringevent.runtime.service.InterviewDetailsModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,6 @@ public class InterviewDetailsRestController extends AbstractRestController<Inter
         return ResponseEntity.ok(interview);
     }
 
-    @Override
-    public ResponseEntity<Interview> updateResource(Interview body, Integer id, HttpServletRequest request) {
-        return null;
-    }
 
     @GetMapping("/{id}")
     @Override
@@ -45,8 +42,21 @@ public class InterviewDetailsRestController extends AbstractRestController<Inter
         return ResponseEntity.ok(interviewList);
     }
 
+    @PutMapping("/{id}")
     @Override
-    public ResponseEntity<Integer> deleteResource(Integer id, HttpServletRequest request) {
-        return null;
+    public ResponseEntity<Interview> updateResource(@RequestBody Interview body, @PathVariable("id") Integer id,
+                                                   HttpServletRequest request) {
+        body.setId(id);
+        Interview interview = interviewDetailsModelService.updateById(id,body);
+        return ResponseEntity.ok(interview);
     }
+
+
+    @DeleteMapping("/{id}")
+    @Override
+    public ResponseEntity<Integer> deleteResource(@PathVariable("id") Integer id, HttpServletRequest request) {
+        Boolean result = interviewDetailsModelService.delete(id);
+        return ResponseEntity.ok(1);
+    }
+
 }

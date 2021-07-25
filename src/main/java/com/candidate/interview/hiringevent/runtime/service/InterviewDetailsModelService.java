@@ -4,6 +4,7 @@ package com.candidate.interview.hiringevent.runtime.service;
 import com.candidate.interview.hiringevent.runtime.dao.impl.InterviewDetailsDaoImpl;
 import com.candidate.interview.hiringevent.runtime.mock.IUserInfoService;
 import com.candidate.interview.hiringevent.runtime.model.Interview;
+import com.candidate.interview.hiringevent.runtime.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,14 @@ public class InterviewDetailsModelService {
     public List<Interview> findAll()
     {
         return interviewDao.selectAll();
+    }
+    public Interview updateById(Integer id, Interview interview){
+        interview.setModifiedBy(userInfoService.getCurrentLoggedInUserInfo().getUserId());
+        return interviewDao.update(id,interview);
+    }
+    public boolean delete(Integer id)
+    {
+        return interviewDao.delete(id)!=0;
     }
 
 }

@@ -2,6 +2,7 @@ package com.candidate.interview.hiringevent.runtime.service;
 
 import com.candidate.interview.hiringevent.runtime.dao.impl.UserInfoDaoImpl;
 import com.candidate.interview.hiringevent.runtime.mock.IUserInfoService;
+import com.candidate.interview.hiringevent.runtime.model.SkillSet;
 import com.candidate.interview.hiringevent.runtime.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,23 @@ public class UserInfoModelService {
     {
         return userInfoDao.selectAll();
     }
+
+
+    public UserInfo findById(Integer id)
+    {
+        return userInfoDao.select(id);
+    }
+
+
+    public UserInfo updateById(Integer id, UserInfo userInfo){
+        System.out.println(userInfo);
+        userInfo.setModifiedBy(userInfoService.getCurrentLoggedInUserInfo().getUserId());
+        return userInfoDao.update(id,userInfo);
+    }
+    public boolean delete(Integer id)
+    {
+        return userInfoDao.delete(id)!=0;
+    }
+
 
 }
