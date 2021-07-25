@@ -17,7 +17,8 @@ public class JobDetailsDaoImpl extends AbstractDaoImpl<JobDetails, Integer> {
     private final String DELETE = "DELETE FROM TBL_JOB_DETAILS WHERE ID=?";
     private final String SELECT_ONE = "SELECT * FROM TBL_JOB_DETAILS WHERE ID=?";
     private final String SELECT_ALL = "SELECT * FROM TBL_JOB_DETAILS";
-    private final String UPDATE_SKILL_SET = "UPDATE TBL_JOB_DETAILS SET TITLE=? WHERE ID=?";
+    private final String UPDATE_SKILL_SET = "UPDATE TBL_JOB_DETAILS SET TITLE=?, DESCRIPTION=?, MANAGER_EMAIL=?, " +
+            "MIN_EXP=? WHERE ID=?";
 
 
     @Override
@@ -39,7 +40,9 @@ public class JobDetailsDaoImpl extends AbstractDaoImpl<JobDetails, Integer> {
 
     @Override
     public JobDetails update(Integer id, JobDetails jobDetails) {
-        int row = getJdbcTemplate().update(UPDATE_SKILL_SET,new Object[]{jobDetails.getTitle(),jobDetails.getId()});
+        int row = getJdbcTemplate().update(UPDATE_SKILL_SET,new Object[]{jobDetails.getTitle(),
+                jobDetails.getDescription(),jobDetails.getHiringManagerEmail(),jobDetails.getMinExp(),
+                jobDetails.getId()});
         if (row == 0)
             throw new RuntimeException("error while saving entry to job details");
         else

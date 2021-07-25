@@ -19,7 +19,7 @@ public class InterviewRoundDaoImpl extends AbstractDaoImpl<InterviewRound, Integ
     private final String DELETE = "DELETE FROM TBL_INTERVIEW_ROUND WHERE ID=?";
     private final String SELECT_ONE = "SELECT * FROM TBL_INTERVIEW_ROUND WHERE ID=?";
     private final String SELECT_ALL = "SELECT * FROM TBL_INTERVIEW_ROUND";
-    private final String UPDATE_INTERVIEW_ROUND = "UPDATE TBL_INTERVIEW_ROUND SET  WHERE ID=?";
+    private final String UPDATE_INTERVIEW_ROUND = "UPDATE TBL_INTERVIEW_ROUND SET   WHERE ID=?";
 
 
     @Override

@@ -16,7 +16,7 @@ public class SkillSetDaoImpl extends AbstractDaoImpl<SkillSet, Integer> {
     private final String DELETE = "DELETE FROM TBL_SKILL_SET WHERE ID=?";
     private final String SELECT_ONE = "SELECT * FROM TBL_SKILL_SET WHERE ID=?";
     private final String SELECT_ALL = "SELECT * FROM TBL_SKILL_SET";
-    private final String UPDATE_SKILL_SET = "UPDATE TBL_SKILL_SET SET SKILL_SET=? WHERE ID=?";
+    private final String UPDATE_SKILL_SET = "UPDATE TBL_SKILL_SET SET SKILL_SET=?,DESCRIPTION=? WHERE ID=?";
 
 
     @Override
@@ -30,7 +30,8 @@ public class SkillSetDaoImpl extends AbstractDaoImpl<SkillSet, Integer> {
 
     @Override
     public SkillSet update(Integer id, SkillSet skillSet) {
-        int rows = getJdbcTemplate().update(UPDATE_SKILL_SET,new Object[]{skillSet.getSkillName(),skillSet.getId()} );
+        int rows = getJdbcTemplate().update(UPDATE_SKILL_SET,new Object[]{skillSet.getSkillName(),
+                skillSet.getDescription(),skillSet.getId()} );
         if (rows == 0)
             throw new RuntimeException("error while updating");
         else

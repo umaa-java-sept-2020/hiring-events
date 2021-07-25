@@ -17,7 +17,8 @@ public class UserInfoDaoImpl extends AbstractDaoImpl<UserInfo, Integer> {
     private final String SELECT_ALL = "SELECT * FROM TBL_USER_INFO";
     private final String DELETE = "DELETE FROM TBL_USER_INFO WHERE ID=?";
     private final String SELECT_ONE = "SELECT * FROM TBL_USER_INFO WHERE ID=?";
-    private final String UPDATE_USER_INFO = "UPDATE TBL_USER_INFO SET EMAIL_ID=? WHERE ID=?";
+    private final String UPDATE_USER_INFO = "UPDATE TBL_USER_INFO SET EMAIL_ID=?, USER_TYPE=?, MOCK_USER=?, " +
+            "LOGIN_PROVIDER=? WHERE ID=?";
     @Override
     public UserInfo insert(UserInfo userInfo) {
         int rows = getJdbcTemplate().update(INSERT, new Object[]{userInfo.getId(),userInfo.getEmail(),userInfo.getUserType().name(),
@@ -29,7 +30,8 @@ public class UserInfoDaoImpl extends AbstractDaoImpl<UserInfo, Integer> {
     }
     @Override
     public UserInfo update(Integer id, UserInfo userInfo) {
-        int rows = getJdbcTemplate().update(UPDATE_USER_INFO,new Object[]{userInfo.getEmail(),userInfo.getId()} );
+        int rows = getJdbcTemplate().update(UPDATE_USER_INFO,new Object[]{userInfo.getEmail(),
+                userInfo.getUserType().name(),userInfo.isMockUser(),userInfo.getLoginProvider().name(),userInfo.getId()} );
         if (rows == 0)
             throw new RuntimeException("error while updating");
         else

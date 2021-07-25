@@ -15,7 +15,8 @@ public class InterviewDetailsDaoImpl extends AbstractDaoImpl<Interview, Integer>
     private final String SELECT_ONE= "SELECT * FROM TBL_INTERVIEW_DETAILS WHERE ID=?";
     private final String SELECT_ALL= "SELECT * FROM TBL_INTERVIEW_DETAILS";
     private final String DELETE = "DELETE FROM TBL_INTERVIEW_DETAILS WHERE ID=?";
-    private final String UPDATE_SKILL_SET = "UPDATE TBL_INTERVIEW_DETAILS SET TITLE=? WHERE ID=?";
+    private final String UPDATE_SKILL_SET = "UPDATE TBL_INTERVIEW_DETAILS SET TITLE=?,JOB_DETAILS_ID=?," +
+            "CANDIDATE_EMAIL=?,INTERVIEW_STATUS=?  WHERE ID=?";
 
     @Override
     public Interview insert(Interview interview) {
@@ -29,7 +30,8 @@ public class InterviewDetailsDaoImpl extends AbstractDaoImpl<Interview, Integer>
 
     @Override
     public Interview update(Integer id, Interview interview) {
-        int rows = getJdbcTemplate().update(UPDATE_SKILL_SET,new Object[]{interview.getTitle(),interview.getId()} );
+        int rows = getJdbcTemplate().update(UPDATE_SKILL_SET,new Object[]{interview.getTitle(),
+                interview.getJobDetailsId(),interview.getCandidateEmail(),interview.getStatus().name(),interview.getId()} );
         if (rows == 0)
             throw new RuntimeException("error while updating");
         else
