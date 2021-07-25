@@ -19,8 +19,9 @@ public class InterviewRoundDaoImpl extends AbstractDaoImpl<InterviewRound, Integ
     private final String DELETE = "DELETE FROM TBL_INTERVIEW_ROUND WHERE ID=?";
     private final String SELECT_ONE = "SELECT * FROM TBL_INTERVIEW_ROUND WHERE ID=?";
     private final String SELECT_ALL = "SELECT * FROM TBL_INTERVIEW_ROUND";
-    private final String UPDATE_INTERVIEW_ROUND = "UPDATE TBL_INTERVIEW_ROUND SET   WHERE ID=?";
-
+    private final String UPDATE_INTERVIEW_ROUND = "UPDATE TBL_INTERVIEW_ROUND SET CANDIDATE_EMAIL_ID=?,"+
+            "INTERVIEW_EMAIL_ID=?,TITLE=?, INTERVIEW_DATE=?, INTERVIEW_TIME=? ,VIRTUAL_LINK=?, INTERVIEW_FEEDBACK=?, "+
+            " INTERVIEW_STATUS=? WHERE ID=?";
 
     @Override
     public InterviewRound insert(InterviewRound entity) {
@@ -28,13 +29,22 @@ public class InterviewRoundDaoImpl extends AbstractDaoImpl<InterviewRound, Integ
                 entity.getCandidateEmailId(), entity.getInterviewerEmailId(), entity.getTitle(), entity.getInterviewDate(),
                 entity.getInterviewTime(), entity.getVirtualLink(), entity.getInterviewFeedBack(), entity.getStatus().name()});
         if (rows == 0)
-            throw new RuntimeException("error while saving entity skillSet");
+            throw new RuntimeException("error while saving entity InterviewRound");
         return entity;
     }
     @Override
     public InterviewRound update(Integer id, InterviewRound interviewRound) {
-        return null;
+        int rows = getJdbcTemplate().update(UPDATE_INTERVIEW_ROUND,new Object[]{interviewRound.getCandidateEmailId(),
+                interviewRound.getInterviewerEmailId(),interviewRound.getTitle(),
+                interviewRound.getInterviewDate(), interviewRound.getInterviewTime(),interviewRound.getVirtualLink(),
+        interviewRound.getInterviewFeedBack(),interviewRound.getStatus().name() , interviewRound.getId()} );
+        if (rows == 0)
+            throw new RuntimeException("error while updating");
+        else
+            System.out.println(rows);
+        return interviewRound;
     }
+
 
     @Override
     public Integer delete(Integer id) {
