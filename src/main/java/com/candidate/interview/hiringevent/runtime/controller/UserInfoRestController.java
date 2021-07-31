@@ -57,4 +57,4 @@ public class UserInfoRestController extends AbstractRestController<UserInfo, Int
         return ResponseEntity.ok(1);
     }
 
-    }
+}
