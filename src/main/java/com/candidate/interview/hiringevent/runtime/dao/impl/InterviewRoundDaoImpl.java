@@ -53,6 +53,7 @@ public class InterviewRoundDaoImpl extends AbstractDaoImpl<InterviewRound, Integ
 
     @Override
     public InterviewRound select(Integer id) {
+        System.out.println("id --------"+id);
         return getJdbcTemplate().queryForObject(SELECT_ONE, interviewRoundRow, new Object[]{id});
     }
 

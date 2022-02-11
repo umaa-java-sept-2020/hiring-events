@@ -31,6 +31,7 @@ public class InterviewRoundController extends AbstractRestController<InterviewRo
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<InterviewRound> getResource(@PathVariable("id") Integer id, HttpServletRequest request) {
+        System.out.println("id from interview Round Controller"+id);
         InterviewRound interviewRound = interviewRoundModelService.findById(id);
 
         return ResponseEntity.ok(interviewRound);

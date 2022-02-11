@@ -14,4 +14,5 @@ public class ApplicationSecurityConfigProvider extends SecurityConfigProvider {
                 "/swagger-ui/**",
                 "/v3/api-docs"};
     }
+
 }
