@@ -1,12 +1,12 @@
 
 package com.candidate.interview.hiringevent.runtime.dao.impl;
 
-        import com.candidate.interview.hiringevent.runtime.dao.AbstractDaoImpl;
-        import com.candidate.interview.hiringevent.runtime.model.*;
-        import org.springframework.jdbc.core.RowMapper;
-        import org.springframework.stereotype.Repository;
+import com.candidate.interview.hiringevent.runtime.dao.AbstractDaoImpl;
+import com.candidate.interview.hiringevent.runtime.model.*;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
-        import java.util.List;
+import java.util.List;
 
 @Repository
 public class InterviewRoundDaoImpl extends AbstractDaoImpl<InterviewRound, Integer> {
@@ -19,8 +19,8 @@ public class InterviewRoundDaoImpl extends AbstractDaoImpl<InterviewRound, Integ
     private final String DELETE = "DELETE FROM TBL_INTERVIEW_ROUND WHERE ID=?";
     private final String SELECT_ONE = "SELECT * FROM TBL_INTERVIEW_ROUND WHERE ID=?";
     private final String SELECT_ALL = "SELECT * FROM TBL_INTERVIEW_ROUND";
-    private final String UPDATE_INTERVIEW_ROUND = "UPDATE TBL_INTERVIEW_ROUND SET CANDIDATE_EMAIL_ID=?,"+
-            "INTERVIEW_EMAIL_ID=?,TITLE=?, INTERVIEW_DATE=?, INTERVIEW_TIME=? ,VIRTUAL_LINK=?, INTERVIEW_FEEDBACK=?, "+
+    private final String UPDATE_INTERVIEW_ROUND = "UPDATE TBL_INTERVIEW_ROUND SET CANDIDATE_EMAIL_ID=?," +
+            "INTERVIEW_EMAIL_ID=?,TITLE=?, INTERVIEW_DATE=?, INTERVIEW_TIME=? ,VIRTUAL_LINK=?, INTERVIEW_FEEDBACK=?, " +
             " INTERVIEW_STATUS=? WHERE ID=?";
 
     @Override
@@ -32,12 +32,13 @@ public class InterviewRoundDaoImpl extends AbstractDaoImpl<InterviewRound, Integ
             throw new RuntimeException("error while saving entity InterviewRound");
         return entity;
     }
+
     @Override
     public InterviewRound update(Integer id, InterviewRound interviewRound) {
-        int rows = getJdbcTemplate().update(UPDATE_INTERVIEW_ROUND,new Object[]{interviewRound.getCandidateEmailId(),
-                interviewRound.getInterviewerEmailId(),interviewRound.getTitle(),
-                interviewRound.getInterviewDate(), interviewRound.getInterviewTime(),interviewRound.getVirtualLink(),
-        interviewRound.getInterviewFeedBack(),interviewRound.getStatus().name() , interviewRound.getId()} );
+        int rows = getJdbcTemplate().update(UPDATE_INTERVIEW_ROUND, new Object[]{interviewRound.getCandidateEmailId(),
+                interviewRound.getInterviewerEmailId(), interviewRound.getTitle(),
+                interviewRound.getInterviewDate(), interviewRound.getInterviewTime(), interviewRound.getVirtualLink(),
+                interviewRound.getInterviewFeedBack(), interviewRound.getStatus().name(), interviewRound.getId()});
         if (rows == 0)
             throw new RuntimeException("error while updating");
         else
@@ -53,7 +54,7 @@ public class InterviewRoundDaoImpl extends AbstractDaoImpl<InterviewRound, Integ
 
     @Override
     public InterviewRound select(Integer id) {
-        System.out.println("id --------"+id);
+        System.out.println("id --------" + id);
         return getJdbcTemplate().queryForObject(SELECT_ONE, interviewRoundRow, new Object[]{id});
     }
 
