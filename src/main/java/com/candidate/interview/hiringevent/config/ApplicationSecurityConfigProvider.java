@@ -13,8 +13,9 @@ public class ApplicationSecurityConfigProvider extends SecurityConfigProvider {
                 "/swagger-ui.html",
                 "/swagger-ui/**",
                 "/v3/api-docs",
-                "/job-details/**",
-                "/applicant/**"};
+                "/job-details/",
+                "/application-developer-jobs/",
+                "/resume/**"};
     }
 
 }

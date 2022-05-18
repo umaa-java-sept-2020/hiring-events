@@ -2,7 +2,6 @@ package com.candidate.interview.hiringevent.runtime.dao.impl;
 
 import com.candidate.interview.hiringevent.runtime.dao.AbstractDaoImpl;
 import com.candidate.interview.hiringevent.runtime.model.LoginProvider;
-import com.candidate.interview.hiringevent.runtime.model.SkillSet;
 import com.candidate.interview.hiringevent.runtime.model.UserInfo;
 import com.candidate.interview.hiringevent.runtime.model.UserType;
 import org.springframework.jdbc.core.RowMapper;

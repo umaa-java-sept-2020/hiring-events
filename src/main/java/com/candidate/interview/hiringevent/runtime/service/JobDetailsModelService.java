@@ -3,7 +3,6 @@ package com.candidate.interview.hiringevent.runtime.service;
 import com.candidate.interview.hiringevent.runtime.dao.impl.JobDetailsDaoImpl;
 import com.candidate.interview.hiringevent.runtime.mock.IUserInfoService;
 import com.candidate.interview.hiringevent.runtime.model.JobDetails;
-import com.candidate.interview.hiringevent.runtime.model.SkillSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

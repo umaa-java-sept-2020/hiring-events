@@ -3,7 +3,10 @@ package com.candidate.interview.hiringevent.runtime.controller;
 import com.candidate.interview.hiringevent.runtime.model.JobDetails;
 import com.candidate.interview.hiringevent.runtime.model.SkillSet;
 import com.candidate.interview.hiringevent.runtime.service.JobDetailsModelService;
+import io.login.client.models.ErrorModel;
+import io.login.client.models.LoginAppException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +24,17 @@ public class JobDetailsController extends AbstractRestController<JobDetails, Int
     @PostMapping("/")
     @Override
     public ResponseEntity<JobDetails> createResource(@RequestBody JobDetails body, HttpServletRequest request) {
-        JobDetails jobdetails = jobDetailsModelService.save(body);
+        JobDetails jobdetails = null;
+        try {
+            jobdetails = jobDetailsModelService.save(body);
+        } catch (DuplicateKeyException ex) {
+            ErrorModel errorModel = new ErrorModel();
+            errorModel.setHttpStatusCode(500);
+            errorModel.setErrorMessage(ex.getMessage());
+            errorModel.setApplicationErrorCode(12123); // using random value now. it may have significance later
+            errorModel.setUserInterfaceMessage("Duplicate Job Found !");
+            throw new LoginAppException(errorModel, ex);
+        }
         return ResponseEntity.ok(jobdetails);
     }
 

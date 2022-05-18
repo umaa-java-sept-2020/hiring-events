@@ -3,7 +3,6 @@ package com.candidate.interview.hiringevent.runtime.dao.impl;
 import com.candidate.interview.hiringevent.runtime.dao.AbstractDaoImpl;
 import com.candidate.interview.hiringevent.runtime.model.Interview;
 import com.candidate.interview.hiringevent.runtime.model.InterviewStatus;
-import com.candidate.interview.hiringevent.runtime.model.UserInfo;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 

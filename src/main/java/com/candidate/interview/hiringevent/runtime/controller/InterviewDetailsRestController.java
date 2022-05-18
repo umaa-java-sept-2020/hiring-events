@@ -4,7 +4,10 @@ import com.candidate.interview.hiringevent.runtime.model.Interview;
 import com.candidate.interview.hiringevent.runtime.model.JobDetails;
 import com.candidate.interview.hiringevent.runtime.model.UserInfo;
 import com.candidate.interview.hiringevent.runtime.service.InterviewDetailsModelService;
+import io.login.client.models.ErrorModel;
+import io.login.client.models.LoginAppException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +25,17 @@ public class InterviewDetailsRestController extends AbstractRestController<Inter
     @PostMapping("/")
     @Override
     public ResponseEntity<Interview> createResource(@RequestBody Interview body, HttpServletRequest request) {
-        Interview interview = interviewDetailsModelService.save(body);
+        Interview interview = null;
+        try {
+            interview = interviewDetailsModelService.save(body);
+        } catch (DuplicateKeyException ex) {
+            ErrorModel errorModel = new ErrorModel();
+            errorModel.setHttpStatusCode(500);
+            errorModel.setErrorMessage(ex.getMessage());
+            errorModel.setApplicationErrorCode(12123); // using random value now. it may have significance later
+            errorModel.setUserInterfaceMessage("Duplicate Email ID found !");
+            throw new LoginAppException(errorModel, ex);
+        }
         return ResponseEntity.ok(interview);
     }
 
